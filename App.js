@@ -1,13 +1,7 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, ViewPagerAndroid, View, Text} from 'react-native';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
+import {StyleSheet, ViewPagerAndroid, View} from 'react-native';
+import Main from './src/Main';
+import Options from './src/Options';
 
 export default class App extends Component {
   render() {
@@ -15,12 +9,8 @@ export default class App extends Component {
       <ViewPagerAndroid
         style={styles.viewPager}
         initialPage={0}>
-        <View style={{...styles.pageStyle, backgroundColor: 'powderblue'}} key="1">
-          <Text>First page</Text>
-        </View>
-        <View style={styles.pageStyle} key="2">
-          <Text>Second page</Text>
-        </View>
+        <Main key="1"></Main>
+        <Options key="2"></Options>
       </ViewPagerAndroid>
     );
   }
@@ -30,8 +20,4 @@ const styles = StyleSheet.create({
   viewPager: {
     flex: 1
   },
-  pageStyle: {
-    alignItems: 'center',
-    padding: 20,
-  }
 });
