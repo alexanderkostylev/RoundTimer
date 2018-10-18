@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, ViewPagerAndroid, View} from 'react-native';
+import {StyleSheet, ViewPagerAndroid} from 'react-native';
 import Main from './src/Main';
 import Options from './src/Options';
 
