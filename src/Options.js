@@ -7,7 +7,6 @@ export default class Options extends Component {
         <View style={{...styles.pageStyle, backgroundColor: 'powderblue'}}>
           <Text>Options page</Text>
         </View>
-        
     );
   }
 }

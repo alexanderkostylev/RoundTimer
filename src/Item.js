@@ -28,7 +28,7 @@ export default class Item extends Component {
   render() {
     return (
         <View style={this.calcStyle().item}>
-          <TouchableOpacity onPress={this.timer.bind(this)}>
+          <TouchableOpacity style={this.calcStyle().item__touch} onPress={this.timer.bind(this)}>
             <Text style={this.calcStyle().item__text}>{this.state.time}</Text>
           </TouchableOpacity> 
         </View>
@@ -37,27 +37,27 @@ export default class Item extends Component {
 
   calcStyle (){ 
     let value = this.state.value;
+    value *= 1.5;
     return {
       item: {
         width: value, 
         height: value, 
         borderRadius: value,
-        borderWidth: 2,
+        borderWidth: 2.5,
+        backgroundColor: '#ffffff',
       }, 
+
+      //TODO Выравнивание текста
       item__text: {
-        fontSize: value/2,
-        textAlign: 'center',
-      }
+        fontSize: value/2.5,
+      },
+      item__touch: {
+        justifyContent: 'center', 
+        alignItems: 'center',
+        width: '100%', 
+        height: '100%', 
+        borderRadius: value,
+      },
     };
   }
 }
-
-const styles = StyleSheet.create({
-  item__touch: {
-    width: 100, 
-    height: 100, 
-  },
-  item__text: {
-
-  }
-});
