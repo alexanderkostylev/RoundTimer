@@ -1,41 +1,63 @@
 import React, {Component} from 'react';
-import { View, Text} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet} from 'react-native';
   
 export default class Item extends Component {
-
   constructor(props){
     super(props);
     this.state = {
-      value: 0,
-      isActive: false
+      value: Number(props.value),
+      time: Number(props.value),
+      isActive: false,
     };
   }
 
-  calcStyle (num, multiplier = 1){ 
-    num *= multiplier;
-    return {
-      width: num, 
-      height: num, 
-      borderRadius: num,
-      borderWidth: 2,
-    };
-  }
-  
-
-  timer(initCount){
-    let count = initCount;
-    setInterval(() =>  count-- , 1000);
-    return (
-      <Text>{count}</Text>
-    )
-
+  timer(){
+    const mainInterval = setInterval(() => {
+      this.setState({isActive: true});
+        if (this.state.time > 0) {
+          this.setState({
+            time: this.state.time - 1
+          });
+        } else {
+          this.setState({isActive: false});
+          clearInterval(mainInterval);
+        }
+    }, 1000);
   }
 
   render() {
     return (
-          <View style={this.calcStyle(150)}>
-            {this.timer(100)}
-          </View>        
+        <View style={this.calcStyle().item}>
+          <TouchableOpacity onPress={this.timer.bind(this)}>
+            <Text style={this.calcStyle().item__text}>{this.state.time}</Text>
+          </TouchableOpacity> 
+        </View>
     );
   }
+
+  calcStyle (){ 
+    let value = this.state.value;
+    return {
+      item: {
+        width: value, 
+        height: value, 
+        borderRadius: value,
+        borderWidth: 2,
+      }, 
+      item__text: {
+        fontSize: value/2,
+        textAlign: 'center',
+      }
+    };
+  }
 }
+
+const styles = StyleSheet.create({
+  item__touch: {
+    width: 100, 
+    height: 100, 
+  },
+  item__text: {
+
+  }
+});

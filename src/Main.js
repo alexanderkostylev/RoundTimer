@@ -1,17 +1,11 @@
 import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 
 import Item from './Item';
   
-const styles = StyleSheet.create({
-  page: {
-    backgroundColor: '#FFF',
-  }
-});
-
 export default class Main extends Component {
   drawItems(){
-    return <Item></Item>;
+    return <Item value="100"></Item>;
   }
 
   render() {
@@ -22,3 +16,9 @@ export default class Main extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  page: {
+    backgroundColor: '#FFF',
+  }
+});
