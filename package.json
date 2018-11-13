@@ -7,14 +7,17 @@
     "test": "jest"
   },
   "dependencies": {
+    "asap": "^2.0.6",
     "react": "16.6.0-alpha.8af6728",
-    "react-native": "0.57.3"
+    "react-native": "0.57.3",
+    "react-native-windows": "0.57.0-rc.0"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.48.1",
-    "react-test-renderer": "16.6.0-alpha.8af6728"
+    "react-test-renderer": "16.6.0-alpha.8af6728",
+    "rnpm-plugin-windows": "^0.2.8"
   },
   "jest": {
     "preset": "react-native"
