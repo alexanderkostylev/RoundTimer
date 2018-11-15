@@ -6,12 +6,12 @@ import Item from './Item';
 export default class Main extends Component {
 
   get data (){
-    return [30, 180, 60, 100];
+    return [100];
   }
 
   drawItems(){
       const output = this.data.map((item, index) => (
-        <Item key={index} value={item} />
+        <Item key={index} initialValue={item} />
       ));
       return output;
   }

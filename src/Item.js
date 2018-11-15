@@ -1,34 +1,73 @@
 import React, {Component} from 'react';
-import { View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet,Alert} from 'react-native';
   
 export default class Item extends Component {
   constructor(props){
     super(props);
     this.state = {
-      value: Number(props.value),
-      time: Number(props.value),
+      initialValue: Number(props.initialValue),
+      time: Number(props.initialValue),
       isActive: false,
     };
   }
 
-  timer(){
-    const mainInterval = setInterval(() => {
-      this.setState({isActive: true});
-        if (this.state.time > 0) {
-          this.setState({
+  _timer(){
+    let mainTimer;
+    const start = () => {
+      this.setState({
+        isActive: true,
+      });
+
+      mainTimer = setInterval(() => {
+        if (this.state.time && this.state.isActive) {
+          this.setState({ 
             time: this.state.time - 1
           });
-        } else {
-          this.setState({isActive: false});
-          clearInterval(mainInterval);
-        }
-    }, 1000);
+         } else {
+           pause();
+         }
+      }, 1000);
+    }
+    const pause = () => {
+      this.setState({
+        isActive: false,
+      });
+      clearInterval(mainTimer);
+    }
+
+    const reset = () => {
+      pause();
+      this.setState({
+        time: this.state.initialValue,
+      });
+    }
+
+    return {
+      start, pause, reset,
+    }
   }
+
+  onPress(){
+    const onSinglePress = () => {
+      this.state.isActive ? this._timer().pause() : this._timer().start(); 
+    }
+
+    const onDoublePress = () => {
+      this._timer().reset();
+    }
+
+    const time = new Date().getTime();
+    const delta = time - this.lastPress;
+    const DOUBLE_PRESS_DELAY = 400;
+
+    delta > DOUBLE_PRESS_DELAY ? onSinglePress() : onDoublePress();
+    this.lastPress = time;
+    }
 
   render() {
     return (
         <View style={this.calcStyle().item}>
-          <TouchableOpacity style={this.calcStyle().item__touch} onPress={this.timer.bind(this)}>
+          <TouchableOpacity style={this.calcStyle().item__touch} onPress={this.onPress.bind(this)}>
             <Text style={this.calcStyle().item__text}>{this.state.time}</Text>
           </TouchableOpacity> 
         </View>
@@ -36,15 +75,18 @@ export default class Item extends Component {
   }
 
   calcStyle (){ 
-    let value = this.state.value;
-    value *= 1.5;
+    const value = this.state.initialValue;
+    const isActive = this.state.isActive;
+
     return {
       item: {
         width: value, 
         height: value, 
+        position: 'absolute',
+        top: 0,
         borderRadius: value,
         borderWidth: 2.5,
-        backgroundColor: '#ffffff',
+        backgroundColor: isActive ? 'green' : 'red',
       }, 
 
       //TODO Выравнивание текста
