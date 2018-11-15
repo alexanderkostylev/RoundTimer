@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{868aa291-055c-463a-a33c-85d710876ba4}</ProjectGuid>
+    <ProjectGuid>{61e73bd5-da71-4c33-818a-3d73ec39c4d7}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RoundTimer</RootNamespace>
@@ -17,7 +17,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>RoundTimer_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>B29C64DA007A767E22EB1E2274D8946AC930D533</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>2F39807C5CC3DC7B571925F594D1E3B09DCFA2A8</PackageCertificateThumbprint>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <DependencyConfiguration>Debug</DependencyConfiguration>
   </PropertyGroup>
