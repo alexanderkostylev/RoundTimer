@@ -1,25 +1,28 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Dimensions} from 'react-native';
 
 import Item from './Item';
   
 export default class Main extends Component {
 
   get data (){
-    return [100];
+    return [100, 50, 200, 30, 60, 90, 150];
   }
 
-  drawItems(){
-      const output = this.data.map((item, index) => (
-        <Item key={index} initialValue={item} />
-      ));
-      return output;
+  getCord(){
+    const {height, width} = Dimensions.get('window');
+    return this.data.map(( value, index) => {
+       let array = new Array(value, value);
+       return array;
+    }, []);
   }
 
   render() {
     return (
         <View style={styles.page}>
-          {this.drawItems()}
+          {this.data.map((value, index) => (
+           <Item key={index} initialValue={value} cord={this.getCord()[index]} />
+           ))}
         </View>
     );
   }

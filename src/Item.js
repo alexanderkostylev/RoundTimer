@@ -7,11 +7,12 @@ export default class Item extends Component {
     this.state = {
       initialValue: Number(props.initialValue),
       time: Number(props.initialValue),
+      percentLeft: 100,
       isActive: false,
     };
   }
 
-  _timer(){
+  timer(){
     let mainTimer;
     const start = () => {
       this.setState({
@@ -21,13 +22,15 @@ export default class Item extends Component {
       mainTimer = setInterval(() => {
         if (this.state.time && this.state.isActive) {
           this.setState({ 
-            time: this.state.time - 1
+            time: this.state.time - 1,
+            percentLeft: 100 - ((this.state.initialValue - this.state.time) * 100 / this.state.initialValue),
           });
          } else {
            pause();
          }
       }, 1000);
     }
+    
     const pause = () => {
       this.setState({
         isActive: false,
@@ -39,6 +42,7 @@ export default class Item extends Component {
       pause();
       this.setState({
         time: this.state.initialValue,
+        percentLeft: 100,
       });
     }
 
@@ -49,20 +53,23 @@ export default class Item extends Component {
 
   onPress(){
     const onSinglePress = () => {
-      this.state.isActive ? this._timer().pause() : this._timer().start(); 
+      this.state.isActive ? this.timer().pause() : this.timer().start(); 
     }
 
     const onDoublePress = () => {
-      this._timer().reset();
+      this.timer().reset();
     }
-
+    
     const time = new Date().getTime();
-    const delta = time - this.lastPress;
-    const DOUBLE_PRESS_DELAY = 400;
+    const delta = time - this._lastPress;
+    const DOUBLE_PRESS_DELAY = 600;
 
-    delta > DOUBLE_PRESS_DELAY ? onSinglePress() : onDoublePress();
-    this.lastPress = time;
+    if (!this._lastPress) { onSinglePress(); }
+    else { 
+      delta > DOUBLE_PRESS_DELAY ? onSinglePress() : onDoublePress();
     }
+    this._lastPress = time;
+  }
 
   render() {
     return (
@@ -75,30 +82,32 @@ export default class Item extends Component {
   }
 
   calcStyle (){ 
-    const value = this.state.initialValue;
-    const isActive = this.state.isActive;
+    calcBackgroundColor = (percentLeft, isActive) => {
+      return isActive ? `hsla(${percentLeft}, 65%, 45%, 1)` : 'rgb(100%, 100%, 100%, 0)';
+    };
 
     return {
       item: {
-        width: value, 
-        height: value, 
+        width: this.state.initialValue, 
+        height: this.state.initialValue, 
         position: 'absolute',
-        top: 0,
-        borderRadius: value,
+        top: this.props.cord[0],
+        left:this.props.cord[1],
         borderWidth: 2.5,
-        backgroundColor: isActive ? 'green' : 'red',
+        borderRadius: this.state.initialValue,
+        backgroundColor: calcBackgroundColor(this.state.percentLeft, this.state.isActive),
       }, 
 
       //TODO Выравнивание текста
       item__text: {
-        fontSize: value/2.5,
+        fontSize: this.state.initialValue/2.5,
       },
       item__touch: {
         justifyContent: 'center', 
         alignItems: 'center',
         width: '100%', 
-        height: '100%', 
-        borderRadius: value,
+        height: '100%',
+        borderRadius: this.state.initialValue,
       },
     };
   }

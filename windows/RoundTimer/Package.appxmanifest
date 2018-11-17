@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="e6eb5298-a517-4dcc-8b4b-5a1c7cd9905c"
+    Name="e20f4cec-0aec-4823-a3ea-a2710aa6a15d"
     Publisher="CN=_rels"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="e6eb5298-a517-4dcc-8b4b-5a1c7cd9905c" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="e20f4cec-0aec-4823-a3ea-a2710aa6a15d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>RoundTimer</DisplayName>

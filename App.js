@@ -18,6 +18,6 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   viewPager: {
-    flex: 1
+    flex: 1,
   },
 });
